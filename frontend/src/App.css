@@ -1,0 +1,288 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+@import "leaflet/dist/leaflet.css"; /* Importation de Leaflet pour la carte */
+
+/* Réserve de l'espace pour la navbar */
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.leaflet-container {
+  width: 100%;
+  height: 500px; /* Ajuste selon tes besoins */
+}
+/* Conteneur principal de la carte */
+.map-container {
+  flex: 1; /* Prend tout l'espace restant */
+  position: relative;
+  z-index: 700;
+}
+/* Ajuster la carte pour ne pas cacher la navbar */
+.map {
+  width: 100%;
+  height: 100%;
+}
+.fullscreen-map {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+}
+
+.Accueil,
+.PostesSources,
+.PostesTransformation,
+.Départs,
+.Disjoncteurs,
+.Alertes {
+  display: flex;
+  height: 90vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Notification pour alerte */
+.notification {
+  background-color: #ff0000;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 2000;
+}
+
+.Statistiques {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #fff;
+  align-items: center;
+  padding: 20px;
+}
+
+.Statistiques h1 {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+}
+
+.stat-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 90%;
+}
+
+.stat-card {
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.stat-card h2 {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.stat-card p {
+  font-size: 1.2rem;
+  color: lightgray;
+}
+
+
+/* --- Navbar Styles --- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e293b; /* Gris foncé */
+  padding: 0.5rem 1.5rem;
+  color: white;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.5rem; /* Espacement entre les liens */
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-link:hover {
+  color: #ffffff; /* Bleu clair au survol */
+}
+
+.navbar-link.active {
+  border-bottom: 2px solid #ecf0f1;
+  color: #e2eaee;
+}
+
+.navbar a {
+  color: white !important;
+}
+
+.navbar-left {
+  display: flex;
+  gap: 1.5rem; /* Espacement entre les liens */
+  align-items: center;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-search input {
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  border: none;
+}
+
+.navbar-search button {
+  background-color: #0ea5e9;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navbar-search button:hover {
+  background-color: #0284c7;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.search-form input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.search-form button {
+  background: none;
+  border: none;
+  margin-left: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #000;
+}
+
+/* Réorganise la navbar pour qu'elle soit horizontale avec la recherche à droite */
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+  color: #000;
+  z-index: 1000;
+}
+
+.nav-menu {
+  background-color: #ffffff;
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 850ms;
+  z-index: 1000;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 450ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: #151414;
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+}
+
+.nav-text a:hover {
+  background-color: #000000;
+  color: #fff;
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  background-color: #ffffff;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+span {
+  margin-left: 16px;
+}
+
+/* Style commun pour tous les boutons */
+.btn-standard {
+  padding: 8px 16px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  background-color: #0ea5e9; /* Bleu clair */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-standard:hover {
+  background-color: #0284c7; /* Bleu un peu plus foncé au survol */
+  transform: scale(1.05);
+}
